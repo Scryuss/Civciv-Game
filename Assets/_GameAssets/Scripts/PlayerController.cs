@@ -1,0 +1,100 @@
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    [Header("Player Movement")]
+    [SerializeField] KeyCode _movementKey;
+    [SerializeField] float _movementSpeed;
+
+    [Header("Player Orientation")]
+    [SerializeField] Transform _orientationTransform;
+
+    [Header("Jump Settings")]
+    [SerializeField] KeyCode _jumpKey;
+    [SerializeField] float _jumpCooldown;
+    [SerializeField] float _jumpForce;
+    [SerializeField] private bool _canJump;
+
+    [Header("Ground Check")]
+    [SerializeField] float _playerHeight;
+    [SerializeField] LayerMask _groundLayer;
+
+    [Header("Sliding Settings")]
+    [SerializeField] float _slideMultiplier;
+
+    private Rigidbody _playerRigidbody;
+    private float _horizontalInput;
+    private float _verticalInput;
+    private Vector3 _movementDirection;
+
+    private bool _isSliding;
+
+    
+
+    void Awake()
+    {
+        _playerRigidbody = GetComponent<Rigidbody>();
+        _playerRigidbody.freezeRotation = true;
+    }
+
+    void Update()
+    {
+        SetInputs();
+    }
+
+    void FixedUpdate()
+    {
+        SetPlayerMovement();
+    }
+
+    private void SetInputs()
+    {
+        _horizontalInput = Input.GetAxisRaw("Horizontal");
+        _verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            _isSliding = true;
+        }
+        else
+        {
+            _isSliding = false;
+        }
+
+        if (Input.GetKeyDown(_jumpKey) && _canJump && IsGrounded())
+        {
+            _canJump = false;
+            SetPlayerJumping();
+            Invoke(nameof(ResetJumping), _jumpCooldown);
+        }
+    }
+
+    private void SetPlayerMovement()
+    {
+        _movementDirection = _orientationTransform.forward * _verticalInput + _orientationTransform.right * _horizontalInput;
+        if (_isSliding)
+        {
+         _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * _slideMultiplier, ForceMode.Force);   
+        }
+        else
+        {
+            _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed, ForceMode.Force);
+        }
+    }
+
+    private void SetPlayerJumping()
+    {
+        _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, 0f, _playerRigidbody.linearVelocity.z);
+        _playerRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+    }
+
+    private void ResetJumping()
+    {
+        _canJump = true;
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, _playerHeight * 0.5f + 0.2f, _groundLayer);
+    }
+}
