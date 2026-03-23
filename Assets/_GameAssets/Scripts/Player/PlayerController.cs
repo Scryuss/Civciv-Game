@@ -15,12 +15,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _jumpForce;
     [SerializeField] private bool _canJump;
 
+    [Header("Sliding Settings")]
+    [SerializeField] float _slideMultiplier;
+    [SerializeField] float _slideDrag;
+
     [Header("Ground Check")]
     [SerializeField] float _playerHeight;
     [SerializeField] LayerMask _groundLayer;
+    [SerializeField] float _groundDrag;
 
-    [Header("Sliding Settings")]
-    [SerializeField] float _slideMultiplier;
+   
 
     private Rigidbody _playerRigidbody;
     private float _horizontalInput;
@@ -40,6 +44,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         SetInputs();
+        SetPlayerDrag();
+        LimitPlayerSpeed();
     }
 
     void FixedUpdate()
@@ -71,7 +77,8 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerMovement()
     {
-        _movementDirection = _orientationTransform.forward * _verticalInput + _orientationTransform.right * _horizontalInput;
+        // World space'de hareket (kameraya bağlı değil - WASD = mutlak yönler)
+        _movementDirection = Vector3.forward * _verticalInput + Vector3.right * _horizontalInput;
         if (_isSliding)
         {
          _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * _slideMultiplier, ForceMode.Force);   
@@ -80,6 +87,29 @@ public class PlayerController : MonoBehaviour
         {
             _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed, ForceMode.Force);
         }
+    }
+
+    private void SetPlayerDrag()
+    {
+        if(_isSliding)
+        {
+            _playerRigidbody.linearDamping = _slideDrag;
+        }
+        else
+        {
+            _playerRigidbody.linearDamping = _groundDrag;
+        }
+    }
+
+    private void LimitPlayerSpeed()
+    {
+        Vector3 flatVelocity = new Vector3(_playerRigidbody.linearVelocity.x, 0f, _playerRigidbody.linearVelocity.z);
+
+        if (flatVelocity.magnitude > _movementSpeed)
+        {
+            Vector3 limitedVelocity = flatVelocity.normalized * _movementSpeed;
+            _playerRigidbody.linearVelocity = new Vector3(limitedVelocity.x, _playerRigidbody.linearVelocity.y, limitedVelocity.z);
+        }    
     }
 
     private void SetPlayerJumping()
