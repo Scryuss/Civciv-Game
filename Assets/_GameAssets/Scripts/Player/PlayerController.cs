@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Movement")]
-    [SerializeField] KeyCode _movementKey;
     [SerializeField] float _movementSpeed;
 
     [Header("Player Orientation")]
@@ -13,6 +12,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] KeyCode _jumpKey;
     [SerializeField] float _jumpCooldown;
     [SerializeField] float _jumpForce;
+    [SerializeField] float _airMultiplier;
+    [SerializeField] float _airDrag;
     [SerializeField] private bool _canJump;
 
     [Header("Sliding Settings")]
@@ -98,34 +99,33 @@ public class PlayerController : MonoBehaviour
          {
             _stateController.ChangeState(newState);
          }
-
-         Debug.Log(newState);
     }
 
     private void SetPlayerMovement()
     {
         // World space'de hareket (kameraya bağlı değil - WASD = mutlak yönler)
         _movementDirection = Vector3.forward * _verticalInput + Vector3.right * _horizontalInput;
-        if (_isSliding)
+
+        float forceMultiplier = _stateController.GetCurrentPlayerState() switch
         {
-         _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * _slideMultiplier, ForceMode.Force);   
-        }
-        else
-        {
-            _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed, ForceMode.Force);
-        }
+            PlayerState.Move => 1f,
+            PlayerState.Slide => _slideMultiplier,
+            PlayerState.Jump => _airMultiplier,
+            _ => 1f
+        };
+
+        _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * forceMultiplier, ForceMode.Force);
     }
 
     private void SetPlayerDrag()
     {
-        if(_isSliding)
+        _playerRigidbody.linearDamping = _stateController.GetCurrentPlayerState() switch
         {
-            _playerRigidbody.linearDamping = _slideDrag;
-        }
-        else
-        {
-            _playerRigidbody.linearDamping = _groundDrag;
-        }
+            PlayerState.Slide or PlayerState.SlideIdle => _slideDrag,
+            PlayerState.Idle or PlayerState.Move => _groundDrag,
+            PlayerState.Jump => _airDrag,
+            _ => _playerRigidbody.linearDamping
+        };
     }
 
     private void LimitPlayerSpeed()

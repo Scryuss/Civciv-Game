@@ -398,8 +398,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19828746, y: 0, z: 0, w: 0.9801439}
-  m_LocalPosition: {x: 0.07999995, y: 2.0257292, z: -9.77}
+  m_LocalRotation: {x: 0.22785026, y: 0, z: 0, w: 0.9736962}
+  m_LocalPosition: {x: 0.07999995, y: 3.125729, z: -10.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1017,8 +1017,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775437328}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19828746, y: 0, z: 0, w: 0.9801439}
-  m_LocalPosition: {x: 0.07999995, y: 2.0257292, z: -9.77}
+  m_LocalRotation: {x: 0.22785026, y: 0, z: 0, w: 0.9736962}
+  m_LocalPosition: {x: 0.07999995, y: 3.125729, z: -10.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1037,7 +1037,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0, y: 1.4, z: -1}
+  ShoulderOffset: {x: 0, y: 2.5, z: -2}
   VerticalArmLength: 0.65
   CameraSide: 1
   CameraDistance: 2
@@ -1071,8 +1071,8 @@ MonoBehaviour:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 0.7, z: 0.2}
+  CenterOnActivate: 0
+  TargetOffset: {x: 0, y: 0.43, z: 0.2}
   Damping: {x: 1, y: 1}
   Lookahead:
     Enabled: 1
