@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public event Action OnPlayerJumped;
+
     [Header("Player Movement")]
     [SerializeField] float _movementSpeed;
 
@@ -25,7 +29,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] float _groundDrag;
 
-   
+    private float _startingMovementSpeed;
+    private float _startingJumpForce;
     private StateController _stateController;
     private Rigidbody _playerRigidbody;
     private float _horizontalInput;
@@ -41,6 +46,9 @@ public class PlayerController : MonoBehaviour
         _stateController = GetComponent<StateController>();
         _playerRigidbody = GetComponent<Rigidbody>();
         _playerRigidbody.freezeRotation = true;
+
+        _startingMovementSpeed = _movementSpeed;
+        _startingJumpForce = _jumpForce;
     }
 
     void Update()
@@ -141,6 +149,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerJumping()
     {
+        OnPlayerJumped?.Invoke();
         _playerRigidbody.linearVelocity = new Vector3(_playerRigidbody.linearVelocity.x, 0f, _playerRigidbody.linearVelocity.z);
         _playerRigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
     }
@@ -163,5 +172,27 @@ public class PlayerController : MonoBehaviour
     private bool IsSliding()
     {
         return _isSliding;
+    }
+
+    public void SetMovementSpeed(float speed, float duration)
+    {
+        _movementSpeed += speed;
+        Invoke(nameof(ResetMovementSpeed), duration);
+    }
+
+    private void ResetMovementSpeed()
+    {
+        _movementSpeed = _startingMovementSpeed;
+    }
+
+    public void SetJumpForce(float jumpForce, float duration)
+    {
+        _jumpForce += jumpForce;
+        Invoke(nameof(ResetJumpForce), duration);
+    }
+
+    private void ResetJumpForce()
+    {
+        _jumpForce = _startingJumpForce;
     }
 }
