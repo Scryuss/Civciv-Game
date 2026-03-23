@@ -164,6 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 103317934}
   - component: {fileID: 103317935}
+  - component: {fileID: 103317936}
   - component: {fileID: 103317933}
   - component: {fileID: 103317932}
   m_Layer: 0
@@ -266,6 +267,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _groundDrag: 2
+--- !u!114 &103317936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103317931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3afe7258193f6b74bb4f01afe6c9b5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StateController
 --- !u!1 &199550031
 GameObject:
   m_ObjectHideFlags: 0
