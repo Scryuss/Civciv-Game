@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
 {
 
     public event Action OnPlayerJumped;
+    public event Action<PlayerState> OnPlayerStateChanged;
 
     [Header("Player Movement")]
     [SerializeField] float _movementSpeed;
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
          if (newState != currentState)
          {
             _stateController.ChangeState(newState);
+            OnPlayerStateChanged?.Invoke(newState);
          }
     }
 
