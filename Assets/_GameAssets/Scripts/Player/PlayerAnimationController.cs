@@ -20,6 +20,12 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.GetCurrentGameState() != GameState.Playing
+          && GameManager.Instance.GetCurrentGameState() != GameState.Resume)
+          {
+              return; // Oyun durumu Playing veya Resume değilse, kamera hareketini engelle
+          }
+          
         SetPlayerAnimation();
     }
 

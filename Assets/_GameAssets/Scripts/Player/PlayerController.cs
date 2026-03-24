@@ -54,6 +54,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.GetCurrentGameState() != GameState.Playing
+          && GameManager.Instance.GetCurrentGameState() != GameState.Resume)
+          {
+              return; // Oyun durumu Playing veya Resume değilse, kamera hareketini engelle
+          }
+
         SetInputs();
         SetStates();
         SetPlayerDrag();
@@ -62,6 +68,12 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.Instance.GetCurrentGameState() != GameState.Playing
+          && GameManager.Instance.GetCurrentGameState() != GameState.Resume)
+          {
+              return; // Oyun durumu Playing veya Resume değilse, kamera hareketini engelle
+          }
+
         SetPlayerMovement();
     }
 

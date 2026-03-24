@@ -5,11 +5,30 @@ public class GameManager : MonoBehaviour
 {
     // UI scriptinin dinleyeceği yeni anons kanalımız (MevcutSayı ve HedefSayı'yı gönderir)
     public static event Action<int, int> OnEggCountUpdated; 
+    public static GameManager Instance { get; private set; } // Singleton örneği
+
+    public event Action<GameState> OnGameStateChanged; // Oyun durumunu dinlemek isteyen diğer sistemler için anons kanalı
 
     [Header("Level Settings")]
     [SerializeField] private int _targetEggCount = 5; 
+
+    private GameState _currentGameState;
     
     private int _currentEggCount = 0;
+
+    private void Awake()
+    {
+        // Eğer sahnede henüz bir GameManager yoksa, kendini Instance olarak ata
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            // Yanlışlıkla sahneye ikinci bir GameManager eklendiyse onu yok et (Güvenlik)
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -20,6 +39,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         EggCollectable.OnEggCollected += HandleEggCollected;
+        ChangeGameState(GameState.Playing); // Oyun başladığında durumu Playing olarak ayarlıyoruz
     }
 
     private void OnDisable()
@@ -40,8 +60,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ChangeGameState(GameState gameState)
+    {
+        OnGameStateChanged?.Invoke(gameState); 
+        _currentGameState = gameState;
+        Debug.Log($"Game State changed to: {gameState}");
+    }
+
     private void GameWin()
     {
+        ChangeGameState(GameState.GameOver);
         Debug.Log("Game Win!");
+    }
+
+    public GameState GetCurrentGameState()
+    {
+        return _currentGameState;
     }
 }
