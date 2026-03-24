@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d91765c0e5cdc43a5af9659988605a, type: 3}
   m_Name: RottenWheat
   m_EditorClassIdentifier: Assembly-CSharp::WheatDesingSO
-  IncreaseDecreaseMultiplier: -20
+  IncreaseDecreaseMultiplier: -25
   ResetBoostDuration: 3
   _activeSprite: {fileID: 21300000, guid: 1061d5daf8937e841a089910502c3724, type: 3}
   _passiveSprite: {fileID: 21300000, guid: 9fb522d1d6d2678469bee20c0b583429, type: 3}
