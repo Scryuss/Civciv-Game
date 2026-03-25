@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class TimerUI : MonoBehaviour
 {
@@ -10,19 +11,33 @@ public class TimerUI : MonoBehaviour
 
     private float _elapsedTime;
     private bool _isTimerRunning;
+    private Tween _rotationTween;
     
     private void Start() 
     {
         PlayRotationAnimation();
         UpdateTimerDisplay(0f); 
+        GameManager.Instance.OnGameStateChanged += GameManager_OnGameStateChanged; 
         
-        // Zamanlayıcının otomatik olarak hemen başlaması için bu satırı ekliyoruz:
         StartTimer(); 
+    }
+
+    private void GameManager_OnGameStateChanged(GameState gameState)
+    {
+        switch (gameState)
+        {
+            case GameState.Paused:
+                PauseTimer();
+                break;
+            case GameState.Resume:
+                ResumeTimer();
+                break;
+        } 
     }
 
     private void Update()
     {
-        // Sadece StartTimer çağrıldıysa süreyi işletir
+        // Sadece StartTimer veya ResumeTimer çağrıldıysa süreyi işletir
         if (_isTimerRunning)
         {
             _elapsedTime += Time.deltaTime;
@@ -32,7 +47,7 @@ public class TimerUI : MonoBehaviour
 
     private void PlayRotationAnimation()
     {
-        _timerRotateableTransform.DORotate(new Vector3(0, 0, -360), 60f, RotateMode.FastBeyond360)
+        _rotationTween = _timerRotateableTransform.DORotate(new Vector3(0, 0, -360), 60f, RotateMode.FastBeyond360)
             .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
     }
@@ -43,10 +58,19 @@ public class TimerUI : MonoBehaviour
         _isTimerRunning = true;
     }
 
-    // İhtiyacın olursa diye durdurma fonksiyonu
-    public void StopTimer()
+    private void PauseTimer()
     {
-        _isTimerRunning = false;
+        _isTimerRunning = false; // Update içindeki sayacı durdurur
+        _rotationTween.Pause(); // Animasyonu durdur
+    }
+
+    private void ResumeTimer()
+    {
+        if (!_isTimerRunning)
+        {
+            _isTimerRunning = true; // Update içindeki sayacı kaldığı yerden başlatır
+            _rotationTween.Play(); // Animasyonu devam ettir
+        }
     }
 
     private void UpdateTimerDisplay(float timeToDisplay)
