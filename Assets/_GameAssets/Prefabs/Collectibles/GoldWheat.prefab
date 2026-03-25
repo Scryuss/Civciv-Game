@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoldWheatCollectibles
   _wheatDesingSO: {fileID: 11400000, guid: c02f14b37b8061f46b20e9d2c4d8b1de, type: 2}
   _playerController: {fileID: 0}
+  _playerStateUI: {fileID: 0}
 --- !u!65 &9081636027854967773
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class GoldWheatCollectibles : MonoBehaviour, ICollectible
 
     void Awake()
     {
+        _playerController = FindAnyObjectByType<PlayerController>();
+        _playerStateUI = FindAnyObjectByType<PlayerStateUI>();
         _playerBoosterTransform = _playerStateUI.GetBoosterSpeedTransform;
         _playerBoosterImage = _playerBoosterTransform.GetComponent<Image>();
     }
@@ -24,7 +26,7 @@ public class GoldWheatCollectibles : MonoBehaviour, ICollectible
        _playerStateUI.PlayBoosterUIAnimation(_playerBoosterTransform, _playerBoosterImage, 
        _playerStateUI.GetBoosterSpeedImage, _wheatDesingSO.ActiveSprite, _wheatDesingSO.PassiveSprite, 
        _wheatDesingSO.ActiveWheatSprite, _wheatDesingSO.PassiveWheatSprite, _wheatDesingSO.ResetBoostDuration);
-       
+       WheatSpawner.TriggerWheatCollected();
        UnityEngine.Object.Destroy(gameObject);
    }
 }

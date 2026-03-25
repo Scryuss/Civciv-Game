@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SettingsUI : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField] private Button _soundButton;
     [SerializeField] private Button _resumeButton;
     [SerializeField] private Button _mainMenuButton;
+    [SerializeField] private Button _restartButton;
 
     private Image _blackBackgroundImage;
     private bool _isSettingsOpen = false; 
@@ -36,6 +38,8 @@ public class SettingsUI : MonoBehaviour
 
         _settingsButton.onClick.AddListener(ToggleSettings);
         _resumeButton.onClick.AddListener(ToggleSettings);
+        // YENİ: Restart butonuna tıklandığında RestartGame metodunu çalıştır
+        _restartButton.onClick.AddListener(RestartGame);
     }
 
     void Update()
@@ -91,4 +95,16 @@ public class SettingsUI : MonoBehaviour
                 
             });
     }
+
+    private void RestartGame()
+        {
+            // 1. ÇOK ÖNEMLİ: Zamanı tekrar akmaya başlat (Yoksa yeni sahne donuk yüklenir)
+            Time.timeScale = 1f;
+
+            // 2. Sahne yüklenirken arkada devam eden eski UI animasyonlarını öldür (Hata almamak için)
+            DOTween.KillAll();
+
+            // 3. Şu an aktif olan sahneyi (GameScene) baştan yükle
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
 }

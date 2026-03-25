@@ -12,6 +12,8 @@ public class HolyWheatCollectibles : MonoBehaviour, ICollectible
 
     void Awake()
     {
+        _playerController = FindAnyObjectByType<PlayerController>();
+        _playerStateUI = FindAnyObjectByType<PlayerStateUI>();
         _playerBoosterTransform = _playerStateUI.GetBoosterJumpingTransform;
         _playerBoosterImage = _playerBoosterTransform.GetComponent<Image>();
     }
@@ -23,7 +25,7 @@ public class HolyWheatCollectibles : MonoBehaviour, ICollectible
 _playerStateUI.PlayBoosterUIAnimation(_playerBoosterTransform, _playerBoosterImage, 
        _playerStateUI.GetBoosterJumpingImage, _wheatDesingSO.ActiveSprite, _wheatDesingSO.PassiveSprite, 
        _wheatDesingSO.ActiveWheatSprite, _wheatDesingSO.PassiveWheatSprite, _wheatDesingSO.ResetBoostDuration);
-
+        WheatSpawner.TriggerWheatCollected();
        UnityEngine.Object.Destroy(gameObject);
    }
 }
