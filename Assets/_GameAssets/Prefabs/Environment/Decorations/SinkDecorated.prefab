@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4918421354102226724}
   - component: {fileID: 8696042493713271451}
   - component: {fileID: 1652791769069876431}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: SinkDecorated
   m_TagString: Untagged
   m_Icon: {fileID: 0}

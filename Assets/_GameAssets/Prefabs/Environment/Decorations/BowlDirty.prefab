@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6442200154753389911}
   - component: {fileID: 981052069384135732}
   - component: {fileID: 832817131190690739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BowlDirty
   m_TagString: Untagged
   m_Icon: {fileID: 0}

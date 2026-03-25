@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2072983771166690029}
   - component: {fileID: 1021648495135838244}
   - component: {fileID: 3176094815269453584}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: CrateLettuce
   m_TagString: Untagged
   m_Icon: {fileID: 0}

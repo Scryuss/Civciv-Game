@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 825316437345308794}
   - component: {fileID: 3057608315651142621}
   - component: {fileID: 8826467151295942269}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MugRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

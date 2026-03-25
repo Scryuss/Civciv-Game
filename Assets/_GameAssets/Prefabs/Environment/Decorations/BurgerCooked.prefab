@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1204799633144462751}
   - component: {fileID: 2086704633876705373}
   - component: {fileID: 4046611489250616426}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: BurgerCooked
   m_TagString: Untagged
   m_Icon: {fileID: 0}

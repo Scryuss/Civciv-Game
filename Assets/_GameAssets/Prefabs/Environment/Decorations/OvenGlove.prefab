@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3782187526679699664}
   - component: {fileID: 5300989756812818441}
   - component: {fileID: 4067862575414032363}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OvenGlove
   m_TagString: Untagged
   m_Icon: {fileID: 0}

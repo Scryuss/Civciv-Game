@@ -124,20 +124,24 @@ public class PlayerController : MonoBehaviour
     }
 
     private void SetPlayerMovement()
+{
+    // ESKİ HALİ (Sabit dünyaya göre):
+    // _movementDirection = Vector3.forward * _verticalInput + Vector3.right * _horizontalInput;
+
+    // YENİ HALİ (Kamera/Yönelim objesine göre):
+    // Artık W'ya basınca 'Orientation' objesinin ilerisine, D'ye basınca sağına gider.
+    _movementDirection = _orientationTransform.forward * _verticalInput + _orientationTransform.right * _horizontalInput;
+
+    float forceMultiplier = _stateController.GetCurrentPlayerState() switch
     {
-        // World space'de hareket (kameraya bağlı değil - WASD = mutlak yönler)
-        _movementDirection = Vector3.forward * _verticalInput + Vector3.right * _horizontalInput;
+        PlayerState.Move => 1f,
+        PlayerState.Slide => _slideMultiplier,
+        PlayerState.Jump => _airMultiplier,
+        _ => 1f
+    };
 
-        float forceMultiplier = _stateController.GetCurrentPlayerState() switch
-        {
-            PlayerState.Move => 1f,
-            PlayerState.Slide => _slideMultiplier,
-            PlayerState.Jump => _airMultiplier,
-            _ => 1f
-        };
-
-        _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * forceMultiplier, ForceMode.Force);
-    }
+    _playerRigidbody.AddForce(_movementDirection.normalized * _movementSpeed * forceMultiplier, ForceMode.Force);
+}
 
     private void SetPlayerDrag()
     {

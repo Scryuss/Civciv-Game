@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5522053511222702720}
   - component: {fileID: 7853582532277069654}
   - component: {fileID: 1452947995693239622}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: BunTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

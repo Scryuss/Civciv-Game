@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6298855216478465349}
   - component: {fileID: 3879509345536443665}
   - component: {fileID: 8995056816010231006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FrideDoorTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 601871919622419251}
   - component: {fileID: 1699353241999260004}
   - component: {fileID: 1407885720411607354}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 3808354223595482907}
   - component: {fileID: 4319378206718738431}
   - component: {fileID: 8486362619374864578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FridgeDoorBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

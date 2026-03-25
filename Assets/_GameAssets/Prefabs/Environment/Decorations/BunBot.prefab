@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 112310514383320088}
   - component: {fileID: 2500766591043845109}
   - component: {fileID: 6823074084900356552}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: BunBot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

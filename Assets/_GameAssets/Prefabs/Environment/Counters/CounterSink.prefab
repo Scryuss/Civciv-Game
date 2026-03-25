@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5356594211232646818}
   - component: {fileID: 967682268125052495}
   - component: {fileID: 2179221717791095512}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: CounterSink
   m_TagString: Untagged
   m_Icon: {fileID: 0}

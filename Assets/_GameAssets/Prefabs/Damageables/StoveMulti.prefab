@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8606036748230745918}
   - component: {fileID: 7402167730242719899}
   - component: {fileID: 2472738878691967295}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: StoveMulti
   m_TagString: Untagged
   m_Icon: {fileID: 0}

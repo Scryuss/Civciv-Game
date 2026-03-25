@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 482162178285974162}
   - component: {fileID: 3746853145103083823}
   - component: {fileID: 4103196284555008866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dishrack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

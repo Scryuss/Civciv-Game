@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3194219506692346134}
   - component: {fileID: 3554941325055178035}
   - component: {fileID: 1725072273507763466}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: ClimbingBoard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

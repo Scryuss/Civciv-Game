@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8196042903610386332}
   - component: {fileID: 7863767377351446276}
   - component: {fileID: 244403876441684464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Kettle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

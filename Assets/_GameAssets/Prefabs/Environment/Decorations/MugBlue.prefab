@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7100870907393268257}
   - component: {fileID: 102706012967880816}
   - component: {fileID: 6515329094439296907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MugBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

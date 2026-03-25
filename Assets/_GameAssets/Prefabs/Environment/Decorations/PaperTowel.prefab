@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 278872236351020069}
   - component: {fileID: 4408329866938466421}
   - component: {fileID: 4345379681381785947}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PaperTowel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
