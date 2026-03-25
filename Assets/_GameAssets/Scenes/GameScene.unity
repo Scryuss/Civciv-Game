@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 133347283e115d147a5fcce7f47a538f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -831,6 +831,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6026156176815899188, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026156176815899188, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6026156176815899188, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6050471580915980491, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1056,7 +1068,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: -967373435552589514, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
+    - {fileID: 1149991516067255805, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
+    - {fileID: 5826077329010844875, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1571080821051435085, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
@@ -1429,6 +1444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec34ef9fd273a2647aabe2ab19881553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthManager
+  _playerHealthUI: {fileID: 689910736}
   _maxHealth: 3
 --- !u!1 &103317931
 GameObject:
@@ -1445,7 +1461,7 @@ GameObject:
   - component: {fileID: 103317938}
   - component: {fileID: 103317933}
   - component: {fileID: 103317932}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1584,6 +1600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12605405762ed194a9a9d25d4fe05aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractionController
+  _playerVisualTransform: {fileID: 7861573172663823455}
 --- !u!1 &116116329
 GameObject:
   m_ObjectHideFlags: 0
@@ -2366,7 +2383,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 70
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2393,7 +2410,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 24.86, y: 2.3106542, z: 5.4600005}
+  m_LocalPosition: {x: 22.36, y: 2.3106542, z: 5.4600005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5439,6 +5456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _winLoseUI: {fileID: 1901609389}
   _targetEggCount: 5
+  _delay: 0.5
 --- !u!1 &989957577
 GameObject:
   m_ObjectHideFlags: 0
@@ -8969,7 +8987,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.000004
+    FieldOfView: 70
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -8997,7 +9015,7 @@ Transform:
   m_GameObject: {fileID: 1775437328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 24.86, y: 2.3106542, z: 5.4600005}
+  m_LocalPosition: {x: 22.36, y: 2.3106542, z: 5.4600005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9019,7 +9037,7 @@ MonoBehaviour:
   ShoulderOffset: {x: 0.5, y: 0.45, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 0.5
-  CameraDistance: 5
+  CameraDistance: 2.5
   AvoidObstacles:
     Enabled: 1
     CollisionFilter:

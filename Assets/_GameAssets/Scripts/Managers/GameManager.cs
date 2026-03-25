@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Level Settings")]
     [SerializeField] private int _targetEggCount = 5; 
+    [SerializeField] private float _delay;
 
     private GameState _currentGameState;
     
@@ -36,6 +38,13 @@ public class GameManager : MonoBehaviour
     {
         // Oyun başlar başlamaz UI'ın "0/5" olarak güncellenmesi için ilk yayını yapıyoruz
         OnEggCountUpdated?.Invoke(_currentEggCount, _targetEggCount);
+
+        HealthManager.Instance.OnPlayerDeath += HealthManager_OnplayerDeath;
+    }
+
+    private void HealthManager_OnplayerDeath()
+    {
+        StartCoroutine(OnGameOver());
     }
 
     private void OnEnable()
@@ -79,5 +88,12 @@ public class GameManager : MonoBehaviour
     public GameState GetCurrentGameState()
     {
         return _currentGameState;
+    }
+
+    private IEnumerator OnGameOver()
+    {
+        yield return new WaitForSeconds(_delay);
+        ChangeGameState(GameState.GameOver);
+        _winLoseUI.OnGameLose();
     }
 }
