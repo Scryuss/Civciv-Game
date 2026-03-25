@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     public event Action<GameState> OnGameStateChanged; // Oyun durumunu dinlemek isteyen diğer sistemler için anons kanalı
 
+    [SerializeField] private WinLoseUI _winLoseUI; // Oyun kazanıldığında veya kaybedildiğinde gösterilecek UI referansı
+
     [Header("Level Settings")]
     [SerializeField] private int _targetEggCount = 5; 
 
@@ -69,8 +71,9 @@ public class GameManager : MonoBehaviour
 
     private void GameWin()
     {
+        // WİN
         ChangeGameState(GameState.GameOver);
-        Debug.Log("Game Win!");
+        _winLoseUI.OnGameWin(); // Kazanma durumunu UI'a bildir
     }
 
     public GameState GetCurrentGameState()

@@ -12,6 +12,7 @@ public class TimerUI : MonoBehaviour
     private float _elapsedTime;
     private bool _isTimerRunning;
     private Tween _rotationTween;
+    private string _finalTime;
     
     private void Start() 
     {
@@ -27,10 +28,13 @@ public class TimerUI : MonoBehaviour
         switch (gameState)
         {
             case GameState.Paused:
-                PauseTimer();
+                StopTimer();
                 break;
             case GameState.Resume:
                 ResumeTimer();
+                break;
+            case GameState.GameOver:
+                FinishTimer(); // Oyun bittiğinde sayacı durdur
                 break;
         } 
     }
@@ -58,7 +62,7 @@ public class TimerUI : MonoBehaviour
         _isTimerRunning = true;
     }
 
-    private void PauseTimer()
+    private void StopTimer()
     {
         _isTimerRunning = false; // Update içindeki sayacı durdurur
         _rotationTween.Pause(); // Animasyonu durdur
@@ -73,11 +77,30 @@ public class TimerUI : MonoBehaviour
         }
     }
 
+    private void FinishTimer()
+    {
+        StopTimer(); // Sayaç ve animasyonu durdur
+        _finalTime = GetFormattetElapsedTime(); // Final zamanı al
+    }
+
+    private string GetFormattetElapsedTime()
+    {
+        int minutes = Mathf.FloorToInt(_elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(_elapsedTime % 60f);
+
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
     private void UpdateTimerDisplay(float timeToDisplay)
     {
         int minutes = Mathf.FloorToInt(timeToDisplay / 60f);
         int seconds = Mathf.FloorToInt(timeToDisplay % 60f);
 
         _timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    public string GetFinalTime()
+    {
+        return _finalTime;
     }
 }
