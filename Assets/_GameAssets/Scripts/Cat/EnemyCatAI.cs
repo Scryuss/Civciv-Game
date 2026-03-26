@@ -5,6 +5,10 @@ using DG.Tweening;
 [RequireComponent(typeof(NavMeshAgent), typeof(CatStateController))]
 public class EnemyCatAI : MonoBehaviour
 {
+    [Header("Takılma Kontrolü")]
+    public float maxTakilmaSuresi = 2f; // Kaç saniye kıpırdayamazsa "takıldı" sayalım?
+    private float takilmaZamanlayici = 0f;
+
     [Header("Devriye Ayarları")]
     public float gezmeYaricapi = 15f;      
     public float gezmeAraligi = 4f;     
@@ -56,6 +60,13 @@ public class EnemyCatAI : MonoBehaviour
 
     void Update()
     {
+        // OYUN DURDUYSA KEDİNİN DÜŞÜNMESİNİ ENGELLE
+        if (GameManager.Instance.GetCurrentGameState() != GameState.Playing &&
+            GameManager.Instance.GetCurrentGameState() != GameState.Resume)
+        {
+            return; 
+        }
+
         HandleAttackTimers(); 
 
         if (saldiriyorMu) return; // Saldırı yaparken hareket etme veya düşünme
@@ -111,18 +122,39 @@ public class EnemyCatAI : MonoBehaviour
     }
 
     private void DevriyeMantigi()
-    {
-        devriyeZamanlayici += Time.deltaTime;
-        if (devriyeZamanlayici >= gezmeAraligi && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-        {
-            Vector3 yeniNokta = RastgeleNoktaBul(transform.position, gezmeYaricapi);
-            agent.SetDestination(yeniNokta);
-            devriyeZamanlayici = 0f;
-        }
+{
+    devriyeZamanlayici += Time.deltaTime;
 
-        CatState yeniDurum = agent.velocity.magnitude > 0.1f ? CatState.Walking : CatState.Idle;
-        durumKontrolcu.ChangeState(yeniDurum);
+    // --- TAKILMA KONTROLÜ BAŞLANGIÇ ---
+    // Eğer kedi bir yere gitmeye çalışıyorsa ama hızı çok düşükse (bir yere takıldıysa)
+    if (agent.hasPath && agent.velocity.magnitude < 0.2f)
+    {
+        takilmaZamanlayici += Time.deltaTime;
+        
+        // Belirlenen süreden fazla takılı kaldıysa yeni bir nokta seçmeye zorla
+        if (takilmaZamanlayici >= maxTakilmaSuresi)
+        {
+            agent.ResetPath(); // Mevcut yolu iptal et
+            devriyeZamanlayici = gezmeAraligi; // Zamanlayıcıyı doldur ki aşağıdaki if çalışsın
+            takilmaZamanlayici = 0f;
+        }
     }
+    else
+    {
+        takilmaZamanlayici = 0f; // Hareket ediyorsa zamanlayıcıyı sıfırla
+    }
+    // --- TAKILMA KONTROLÜ BİTİŞ ---
+
+    if (devriyeZamanlayici >= gezmeAraligi && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+    {
+        Vector3 yeniNokta = RastgeleNoktaBul(transform.position, gezmeYaricapi);
+        agent.SetDestination(yeniNokta);
+        devriyeZamanlayici = 0f;
+    }
+
+    CatState yeniDurum = agent.velocity.magnitude > 0.1f ? CatState.Walking : CatState.Idle;
+    durumKontrolcu.ChangeState(yeniDurum);
+}
 
     private void KovalamaMantigi()
     {
@@ -233,4 +265,32 @@ public class EnemyCatAI : MonoBehaviour
         if (NavMesh.SamplePosition(rastgeleYon, out NavMeshHit hit, yaricap, 1)) return hit.position;
         return merkez;
     }
+
+    private void OnDrawGizmos()
+{
+    // Agent henüz oluşmadıysa veya sahnede değilse hata vermemesi için kontrol
+    if (agent == null || !agent.isOnNavMesh) return;
+
+    // 1. HEDEF NOKTAYI ÇİZ (Küre şeklinde)
+    // Eğer kovalıyorsa kırmızı, devriyedeyse cam göbeği renginde görünsün
+    Gizmos.color = kovaliyorMu ? Color.red : Color.cyan;
+    Gizmos.DrawSphere(agent.destination, 0.4f);
+
+    // 2. MEVCUT ROTAYI ÇİZ (Çizgi şeklinde)
+    // NavMesh'in hesapladığı tüm köşe noktalarını birleştirir
+    if (agent.hasPath)
+    {
+        Gizmos.color = kovaliyorMu ? Color.red : Color.yellow;
+        Vector3[] corners = agent.path.corners;
+        for (int i = 0; i < corners.Length - 1; i++)
+        {
+            Gizmos.DrawLine(corners[i], corners[i + 1]);
+        }
+    }
+
+    // 3. DEVRIYE ALANINI ÇİZ (Tel küre şeklinde)
+    // Kedinin o anki konumuna göre ne kadarlık bir alanda rastgele nokta aradığını gösterir
+    Gizmos.color = new Color(0, 1, 0, 0.3f); // Şeffaf yeşil
+    Gizmos.DrawWireSphere(transform.position, gezmeYaricapi);
+}
 }

@@ -193,10 +193,16 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetMovementSpeed(float speed, float duration)
-    {
-        _movementSpeed += speed;
-        Invoke(nameof(ResetMovementSpeed), duration);
-    }
+{
+    // 1. Önceki sıfırlama talebini iptal et (Süre yenileme mantığı)
+    CancelInvoke(nameof(ResetMovementSpeed)); 
+    
+    // 2. Hızı temel hızın üzerine belirlediğin miktar kadar ekle (Üst üste binip sonsuz artmaması için)
+    _movementSpeed = _startingMovementSpeed + speed; 
+    
+    // 3. Yeni süreyi baştan başlat
+    Invoke(nameof(ResetMovementSpeed), duration); 
+}
 
     private void ResetMovementSpeed()
     {
@@ -204,10 +210,16 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SetJumpForce(float jumpForce, float duration)
-    {
-        _jumpForce += jumpForce;
-        Invoke(nameof(ResetJumpForce), duration);
-    }
+{
+    // 1. Önceki zıplama sıfırlama talebini iptal et
+    CancelInvoke(nameof(ResetJumpForce));
+    
+    // 2. Gücü tazele
+    _jumpForce = _startingJumpForce + jumpForce;
+    
+    // 3. Yeni süreyi başlat
+    Invoke(nameof(ResetJumpForce), duration);
+}
 
     private void ResetJumpForce()
     {

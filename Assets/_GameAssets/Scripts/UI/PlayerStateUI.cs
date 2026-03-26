@@ -29,6 +29,10 @@ public class PlayerStateUI : MonoBehaviour
     [SerializeField] private float _moveDuration;
     [SerializeField] private Ease _moveEase;
 
+    private Coroutine _jumpingCoroutine;
+    private Coroutine _speedCoroutine;
+    private Coroutine _slowCoroutine;
+
     public RectTransform GetBoosterJumpingTransform => _boosterJumpingTransform;
     public RectTransform GetBoosterSpeedTransform => _boosterSpeedTransform;
     public RectTransform GetBoosterSlowTransform => _boosterSlowTransform;
@@ -95,7 +99,22 @@ public class PlayerStateUI : MonoBehaviour
     }
 
     public void PlayBoosterUIAnimation(RectTransform activeTransform, Image boosterImage, Image wheatImage, Sprite boosterActiveSprite, Sprite boosterPassiveSprite, Sprite activeWheatSprite, Sprite passiveWheatSprite, float duration)
+{
+    // Hangi panelin animasyonuysa, onun mevcut Coroutine'ini durdur
+    if (activeTransform == _boosterJumpingTransform)
     {
-        StartCoroutine(SetBoosterUserInterface(activeTransform, boosterImage, wheatImage, boosterActiveSprite, boosterPassiveSprite, activeWheatSprite, passiveWheatSprite, duration));
+        if (_jumpingCoroutine != null) StopCoroutine(_jumpingCoroutine);
+        _jumpingCoroutine = StartCoroutine(SetBoosterUserInterface(activeTransform, boosterImage, wheatImage, boosterActiveSprite, boosterPassiveSprite, activeWheatSprite, passiveWheatSprite, duration));
     }
+    else if (activeTransform == _boosterSpeedTransform)
+    {
+        if (_speedCoroutine != null) StopCoroutine(_speedCoroutine);
+        _speedCoroutine = StartCoroutine(SetBoosterUserInterface(activeTransform, boosterImage, wheatImage, boosterActiveSprite, boosterPassiveSprite, activeWheatSprite, passiveWheatSprite, duration));
+    }
+    else if (activeTransform == _boosterSlowTransform)
+    {
+        if (_slowCoroutine != null) StopCoroutine(_slowCoroutine);
+        _slowCoroutine = StartCoroutine(SetBoosterUserInterface(activeTransform, boosterImage, wheatImage, boosterActiveSprite, boosterPassiveSprite, activeWheatSprite, passiveWheatSprite, duration));
+    }
+}
 }

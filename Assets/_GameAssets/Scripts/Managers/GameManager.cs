@@ -76,6 +76,16 @@ public class GameManager : MonoBehaviour
         OnGameStateChanged?.Invoke(gameState); 
         _currentGameState = gameState;
         Debug.Log($"Game State changed to: {gameState}");
+
+        // ZAMANI YÖNETME İŞLEMİ
+        if (gameState == GameState.Paused)
+        {
+            Time.timeScale = 0f; // Zamanı tamamen dondur (Fizik, NavMesh, Animasyonlar durur)
+        }
+        else if (gameState == GameState.Playing || gameState == GameState.Resume)
+        {
+            Time.timeScale = 1f; // Zamanı normal akışına geri döndür
+        }
     }
 
     private void GameWin()
