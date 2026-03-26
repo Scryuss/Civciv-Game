@@ -3647,6 +3647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 447862982}
+  - component: {fileID: 447862986}
   - component: {fileID: 447862985}
   - component: {fileID: 447862984}
   - component: {fileID: 447862983}
@@ -3759,6 +3760,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 447862981}
   m_CullTransparentMesh: 1
+--- !u!114 &447862986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 447862981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &452881354 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4427903340597012283, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
@@ -3918,6 +3937,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536927656}
+  - component: {fileID: 536927660}
   - component: {fileID: 536927659}
   - component: {fileID: 536927658}
   - component: {fileID: 536927657}
@@ -4030,6 +4050,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536927655}
   m_CullTransparentMesh: 1
+--- !u!114 &536927660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536927655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &536978414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 224883184183070155, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
@@ -5641,6 +5679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 802188283}
+  - component: {fileID: 802188287}
   - component: {fileID: 802188286}
   - component: {fileID: 802188285}
   - component: {fileID: 802188284}
@@ -5753,6 +5792,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 802188282}
   m_CullTransparentMesh: 1
+--- !u!114 &802188287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 802188282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &823349864
 GameObject:
   m_ObjectHideFlags: 0
@@ -6025,7 +6082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951802539}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.55, y: -6.46458, z: 36.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6033,7 +6090,7 @@ Transform:
   - {fileID: 7853303726863159511}
   - {fileID: 418601160}
   - {fileID: 1480842055}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1146498433}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &951802541
 CapsuleCollider:
@@ -7006,6 +7063,7 @@ Transform:
   - {fileID: 51207259}
   - {fileID: 1195461046}
   - {fileID: 1890021904}
+  - {fileID: 951802540}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1181992619
@@ -7209,6 +7267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1228064495}
+  - component: {fileID: 1228064499}
   - component: {fileID: 1228064498}
   - component: {fileID: 1228064497}
   - component: {fileID: 1228064496}
@@ -7320,6 +7379,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228064494}
   m_CullTransparentMesh: 1
+--- !u!114 &1228064499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228064494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &1238753908
 GameObject:
   m_ObjectHideFlags: 0
@@ -7888,6 +7965,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1356058782}
+  - component: {fileID: 1356058786}
   - component: {fileID: 1356058785}
   - component: {fileID: 1356058784}
   - component: {fileID: 1356058783}
@@ -8000,6 +8078,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356058781}
   m_CullTransparentMesh: 1
+--- !u!114 &1356058786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356058781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &1359006409 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8659582492354398281, guid: 69ef6ec9a0720ab4181a382ad028a657, type: 3}
@@ -8183,6 +8279,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1458827365}
+  - component: {fileID: 1458827369}
   - component: {fileID: 1458827368}
   - component: {fileID: 1458827367}
   - component: {fileID: 1458827366}
@@ -8295,6 +8392,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458827364}
   m_CullTransparentMesh: 1
+--- !u!114 &1458827369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458827364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!4 &1459012380 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1171560880081280020, guid: 981da54a9fd355e4cb45d308863d53b5, type: 3}
@@ -8764,6 +8879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1564183917}
+  - component: {fileID: 1564183921}
   - component: {fileID: 1564183920}
   - component: {fileID: 1564183919}
   - component: {fileID: 1564183918}
@@ -8875,6 +8991,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1564183916}
   m_CullTransparentMesh: 1
+--- !u!114 &1564183921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1564183916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &1565612657
 GameObject:
   m_ObjectHideFlags: 0
@@ -9486,6 +9620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690319872}
+  - component: {fileID: 1690319876}
   - component: {fileID: 1690319875}
   - component: {fileID: 1690319874}
   - component: {fileID: 1690319873}
@@ -9598,6 +9733,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690319871}
   m_CullTransparentMesh: 1
+--- !u!114 &1690319876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690319871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &1692755653
 GameObject:
   m_ObjectHideFlags: 0
@@ -11598,6 +11751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2089501408}
+  - component: {fileID: 2089501412}
   - component: {fileID: 2089501411}
   - component: {fileID: 2089501410}
   - component: {fileID: 2089501409}
@@ -11710,6 +11864,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089501407}
   m_CullTransparentMesh: 1
+--- !u!114 &2089501412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089501407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7103ace2bd904164c975c2a1ba341cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonTweenEffects
+  _hoverScale: 1.1
+  _hoverDuration: 0.2
+  _hoverEase: 27
+  _clickScale: 0.9
+  _clickDuration: 0.1
+  _clickEase: 6
 --- !u!1 &28991511747692012
 GameObject:
   m_ObjectHideFlags: 0
@@ -14362,4 +14534,3 @@ SceneRoots:
   - {fileID: 1091552155}
   - {fileID: 199550032}
   - {fileID: 1146498433}
-  - {fileID: 951802540}

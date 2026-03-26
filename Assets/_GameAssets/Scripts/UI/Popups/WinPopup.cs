@@ -17,6 +17,7 @@ public class WinPopup : MonoBehaviour
     {
         _timerText.text = _timerUI.GetFinalTime(); // TimerUI'dan final zamanı alıp ekrana yazdırıyoruz
         _oneMoreButton.onClick.AddListener(OnOneMoreButtonClicked);
+        _mainMenuButton.onClick.AddListener(GoToMainMenu);
     }
 
     private void OnOneMoreButtonClicked()
@@ -24,4 +25,10 @@ public class WinPopup : MonoBehaviour
         DOTween.KillAll();
         SceneManager.LoadScene("GameScene"); 
     }
+
+    private void GoToMainMenu()
+{
+    DOTween.KillAll(); //
+    SceneManager.LoadScene("MenuScene"); 
+}
 }

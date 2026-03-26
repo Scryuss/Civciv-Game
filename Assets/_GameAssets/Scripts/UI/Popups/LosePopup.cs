@@ -16,6 +16,7 @@ public class LosePopup : MonoBehaviour
     {
         _timerText.text = _timerUI.GetFinalTime(); // TimerUI'dan final zamanı alıp ekrana yazdırıyoruz
         _tryAgainButton.onClick.AddListener(OnTryAgainButtonClicked);
+        _mainMenuButton.onClick.AddListener(GoToMainMenu);
     }
 
     private void OnTryAgainButtonClicked()
@@ -23,4 +24,10 @@ public class LosePopup : MonoBehaviour
         DOTween.KillAll();
         SceneManager.LoadScene("GameScene"); 
     }
+
+    private void GoToMainMenu()
+{
+    DOTween.KillAll(); //
+    SceneManager.LoadScene("MenuScene"); 
+}
 }

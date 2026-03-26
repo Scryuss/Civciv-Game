@@ -40,6 +40,7 @@ public class SettingsUI : MonoBehaviour
         _resumeButton.onClick.AddListener(ToggleSettings);
         // YENİ: Restart butonuna tıklandığında RestartGame metodunu çalıştır
         _restartButton.onClick.AddListener(RestartGame);
+        _mainMenuButton.onClick.AddListener(GoToMainMenu);
     }
 
     void Update()
@@ -107,4 +108,11 @@ public class SettingsUI : MonoBehaviour
             // 3. Şu an aktif olan sahneyi (GameScene) baştan yükle
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        private void GoToMainMenu()
+{
+    Time.timeScale = 1f; // Zamanı normale döndür
+    DOTween.KillAll(); // Animasyonları temizle
+    SceneManager.LoadScene("MenuScene"); // "MainMenuScene" yerine kendi ana menü sahnenin adını yazmalısın
+}
 }

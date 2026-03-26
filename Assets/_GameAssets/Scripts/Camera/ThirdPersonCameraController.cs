@@ -26,6 +26,7 @@ public class ThirdPersonCameraController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        _rotationY = -90f;
     }
 
     void Update()

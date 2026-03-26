@@ -40,10 +40,17 @@ public class EggCounterUI : MonoBehaviour
         GameManager.OnEggCountUpdated += UpdateEggText;
     }
 
-    private void OnDisable()
+    // Scripts/UI/EggCounterUI.cs içindeki OnDisable metodunu bu şekilde güncelle
+private void OnDisable()
+{
+    GameManager.OnEggCountUpdated -= UpdateEggText;
+
+    // Obje devre dışı kalırken (sahne değişirken) üzerindeki animasyonları öldür
+    if (_eggText != null)
     {
-        GameManager.OnEggCountUpdated -= UpdateEggText;
+        _eggText.transform.DOKill();
     }
+}
 
     private void UpdateEggText(int currentCount, int targetCount)
     {
