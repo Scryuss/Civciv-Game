@@ -32,6 +32,8 @@ public class HealthManager : MonoBehaviour
             _currentHealth -= damageAmount;
             _playerHealthUI.AnimateDamage();
 
+            CameraShakeManager.Instance.ShakeCamera(3f);
+
             if (_currentHealth <= 0)
             {
                 OnPlayerDeath?.Invoke();
