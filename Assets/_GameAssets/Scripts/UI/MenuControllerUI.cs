@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using MaskTransitions;
 
 public class MenuControllerUI : MonoBehaviour
 {
@@ -12,15 +13,8 @@ public class MenuControllerUI : MonoBehaviour
     [SerializeField] private Button _extraButton2;
 
     [Header("Geçiş Süreleri")]
-    [Tooltip("Ekranın tamamen kararma süresi")]
-    [SerializeField] private float _fadeDuration = 0.6f;
-    
     [Tooltip("Butonların küçülerek yok olma süresi")]
     [SerializeField] private float _buttonHideDuration = 0.3f; 
-
-    [Header("Referanslar")]
-    [SerializeField] private Image _fadeOverlay; 
-    [SerializeField] private Ease _fadeEase = Ease.Linear;
 
     private void Awake()
     {
@@ -29,12 +23,6 @@ public class MenuControllerUI : MonoBehaviour
 
         if (_quitButton != null)
             _quitButton.onClick.AddListener(QuitGame);
-
-        if (_fadeOverlay != null)
-        {
-            _fadeOverlay.gameObject.SetActive(false);
-            _fadeOverlay.color = new Color(0, 0, 0, 0); 
-        }
     }
 
     public void PlayGame()
@@ -45,27 +33,20 @@ public class MenuControllerUI : MonoBehaviour
         // 2. Butonları etkileşime kapat
         SetButtonsInteractable(false);
 
-        // 3. KRİTİK: Butonların üzerindeki efekt scriptlerini kapatıyoruz
-        // Böylece fare hareketleri animasyonu bozamaz
+        // 3. Butonların üzerindeki efekt scriptlerini kapatıyoruz
         DisableButtonEffects(_playButton);
         DisableButtonEffects(_quitButton);
         DisableButtonEffects(_extraButton1);
         DisableButtonEffects(_extraButton2);
 
-        // 4. Kararma efekti
-        if (_fadeOverlay != null)
+        // 4. Asset'in Maskeli Geçiş Animasyonunu Başlat
+        if (TransitionManager.Instance != null)
         {
-            _fadeOverlay.gameObject.SetActive(true);
-            _fadeOverlay.DOFade(1f, _fadeDuration)
-                .SetEase(_fadeEase)
-                .SetUpdate(true)
-                .OnComplete(() => 
-                {
-                    SceneManager.LoadScene("GameScene");
-                });
+            TransitionManager.Instance.LoadLevel("GameScene");
         }
         else
         {
+            // Eğer hiyerarşide TransitionManager unutulmuşsa hata vermesin diye normal yükleme
             SceneManager.LoadScene("GameScene");
         }
 

@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MaskTransitions; // Asset'in kütüphanesini ekledik
 
 public class SettingsUI : MonoBehaviour
 {
@@ -12,12 +13,10 @@ public class SettingsUI : MonoBehaviour
     
     [Header("Animation Settings")]
     [SerializeField] private float _animationDuration;
+    [SerializeField] private float _buttonHideDuration = 0.3f; // Butonların kaybolma süresi
 
     [Header("Ease Settings")]
-    [Tooltip("Menü açılış animasyonunun hız eğrisi (Örn: OutBack)")]
     [SerializeField] private Ease _openEase = Ease.OutBack;
-    
-    [Tooltip("Menü kapanış animasyonunun hız eğrisi (Örn: InBack)")]
     [SerializeField] private Ease _closeEase = Ease.InBack;
 
     [Header("Buttons")]
@@ -38,31 +37,32 @@ public class SettingsUI : MonoBehaviour
 
         _settingsButton.onClick.AddListener(ToggleSettings);
         _resumeButton.onClick.AddListener(ToggleSettings);
-        // YENİ: Restart butonuna tıklandığında RestartGame metodunu çalıştır
         _restartButton.onClick.AddListener(RestartGame);
         _mainMenuButton.onClick.AddListener(GoToMainMenu);
     }
 
     void Update()
+{
+    // EKLENEN KISIM: Eğer oyun durumu "GameOver" ise alt satırlara inmeden işlemi iptal et
+    if (_gameManager.GetCurrentGameState() == GameState.GameOver)
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            ToggleSettings();
-        }
+        return; 
     }
+
+    if (Input.GetKeyDown(KeyCode.Escape))
+    {
+        ToggleSettings();
+    }
+}
 
     private void ToggleSettings()
     {
         _isSettingsOpen = !_isSettingsOpen; 
 
         if (_isSettingsOpen)
-        {
             OpenSettingsMenu();
-        }
         else
-        {
             CloseSettingsMenu();
-        }
     }
 
     private void OpenSettingsMenu()
@@ -72,11 +72,9 @@ public class SettingsUI : MonoBehaviour
         _blackBackgroundObject.SetActive(true);
         _settingsPopupObject.SetActive(true);
         
-        // YENİ: Varsa devam eden eski animasyonları iptal et (Spam koruması)
         _blackBackgroundImage.DOKill();
         _settingsPopupObject.transform.DOKill();
 
-        // Animasyonları başlat
         _blackBackgroundImage.DOFade(0.8f, _animationDuration).SetEase(_openEase).SetUpdate(true);
         _settingsPopupObject.transform.DOScale(1.5f, _animationDuration).SetEase(_openEase).SetUpdate(true);
     }
@@ -90,29 +88,60 @@ public class SettingsUI : MonoBehaviour
         _settingsPopupObject.transform.DOScale(0f, _animationDuration).SetEase(_closeEase).SetUpdate(true)
             .OnComplete(() => 
             {
-                _gameManager.ChangeGameState(GameState.Resume); // Menü kapandıktan sonra Resume durumuna geç
+                _gameManager.ChangeGameState(GameState.Resume); 
                 _blackBackgroundObject.SetActive(false);
                 _settingsPopupObject.SetActive(false);
-                
             });
     }
 
     private void RestartGame()
-        {
-            // 1. ÇOK ÖNEMLİ: Zamanı tekrar akmaya başlat (Yoksa yeni sahne donuk yüklenir)
-            Time.timeScale = 1f;
+    {
+        Time.timeScale = 1f; // ÖNEMLİ: Zamanı açmazsak TransitionManager animasyonu donar
+        DOTween.KillAll();
 
-            // 2. Sahne yüklenirken arkada devam eden eski UI animasyonlarını öldür (Hata almamak için)
-            DOTween.KillAll();
-
-            // 3. Şu an aktif olan sahneyi (GameScene) baştan yükle
+        if (TransitionManager.Instance != null)
+            TransitionManager.Instance.LoadLevel(SceneManager.GetActiveScene().name);
+        else
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
 
-        private void GoToMainMenu()
-{
-    Time.timeScale = 1f; // Zamanı normale döndür
-    DOTween.KillAll(); // Animasyonları temizle
-    SceneManager.LoadScene("MenuScene"); // "MainMenuScene" yerine kendi ana menü sahnenin adını yazmalısın
-}
+        HideAllButtons();
+    }
+
+    private void GoToMainMenu()
+    {
+        Time.timeScale = 1f; 
+        DOTween.KillAll(); 
+
+        if (TransitionManager.Instance != null)
+            TransitionManager.Instance.LoadLevel("MenuScene"); 
+        else
+            SceneManager.LoadScene("MenuScene"); 
+
+        HideAllButtons();
+    }
+
+    // Ekrandaki tüm butonları şıkça küçülterek yok eder
+    private void HideAllButtons()
+    {
+        HideButton(_settingsButton);
+        HideButton(_musicButton);
+        HideButton(_soundButton);
+        HideButton(_resumeButton);
+        HideButton(_mainMenuButton);
+        HideButton(_restartButton);
+    }
+
+    private void HideButton(Button btn)
+    {
+        if (btn != null)
+        {
+            // Fare etkileşimi animasyonu bozmasın diye ButtonTweenEffects'i kapat
+            var effect = btn.GetComponent<ButtonTweenEffects>();
+            if (effect != null) effect.enabled = false;
+
+            btn.interactable = false;
+            btn.transform.DOKill();
+            btn.transform.DOScale(Vector3.zero, _buttonHideDuration).SetEase(Ease.InBack).SetUpdate(true);
+        }
+    }
 }
